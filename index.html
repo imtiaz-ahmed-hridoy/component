@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <!-- Correct Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+    <script src="app.js"></script>
+    <style>
+        [x-cloak] { display: none !important; }
+    </style>
+</head>
+<body class=" min-h-screen p-8">
+    <div x-data="{open:false}">
+        <button @click="open=!open" class="py-2 px-6 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+            Toggle
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 ml-2 transition-all"
+            :class="{'rotate-90 ': open}">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+              
+              
+        </button>
+    
+        <ul x-show="open" 
+            @click.outside="open=false"
+            x-init="$nextTick(() => open=false)" 
+            x-cloak 
+            x-transition
+            class="bg-gray-500 text-white py-2 px-4 rounded-md shadow"
+        >
+            <li class="hover:bg-red-800 hover:text-black py-1 px-2"><a href="#">Edit</a></li>
+            <li class="hover:bg-red-800 hover:text-black py-1 px-2"><a href="#">Update</a></li>
+            <li class="hover:bg-red-800 hover:text-black py-1 px-2"><a href="#">Delete</a></li>
+        </ul>
+    </div>
+    
+    
+    
+<br>
+<!-- model -->
+
+<div x-data="{open:false}">
+    <button @click="open=!open" class="py-2 px-6 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+        Toggle Model</button>
+        <!-- backdrop -->
+       
+    <div x-show="open" x-cloak x-transition class="fixed inset-0 bg-red-900 bg-opacity-50 flex items-center justify-center">
+        <!-- model  -->
+        <div  class="bg-white p-8 rounded-md shadow-lg">
+            
+            <div class="flex items-center justify-between">Model Titel
+                <button @click="open=false">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                  </svg>
+                </button>
+            </div>
+            <div >
+                Model Body
+            </div>
+            <div class="flex">
+                <button @click="window.location.href='https://www.youtube.com/'" class="py-1 px-2 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+                    Accept</button>
+                    <button @click="open=!open" class="ml-1 py-1 px-2 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+                        Close</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<br>
+<!-- tabs -->
+
+<div x-data="{ tabs: ['Home','About','Services'],activeTab:'Home'}" class="w-full max-w-xl bg-white shadow-md rounded-md p-6">
+
+<!-- button -->
+ <div class="flex border-b">
+    <template x-for="tab in tabs">
+       <a @click="activeTab = tab"
+       x-text="tab"
+       class="px-4 py-2 font-semibold border-b-2 focus:outline-none"
+       :class="{'border-blue-500 text-blue-600':activeTab === tab}"></a>
+    </template>
+ </div>
+ <!-- Tabs -->
+  <div x-show="activeTab === 'Home'"><h2 class="text-xl font-semibold">🏠 Home</h2>
+    <p>Welcome to our homepage! Discover amazing content here.</p></div>
+  <div x-show="activeTab === 'About'"><h2 class="text-xl font-semibold"> About</h2>
+    <p>We offer top-notch web development, SEO, and digital marketing.</p></div>
+  <div x-show="activeTab === 'Services'"><h2 class="text-xl font-semibold">💼 Services</h2>
+    <p>We offer top-notch web development, SEO, and digital marketing.</p></div>
+
+</div>
+    
+</body>
+</html>
