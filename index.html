@@ -1,100 +1,264 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
 
-    <!-- Correct Tailwind CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
-    <script src="app.js"></script>
-    <style>
-        [x-cloak] { display: none !important; }
-    </style>
+  <!-- Correct Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/@alpinejs/intersect@3.x.x/dist/cdn.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.8/dist/cdn.min.js"></script>
+  <script src="app.js"></script>
+  <style>
+    [x-cloak] {
+      display: none !important;
+    }
+  </style>
 </head>
-<body class=" min-h-screen p-8">
-    <div x-data="{open:false}">
-        <button @click="open=!open" class="py-2 px-6 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
-            Toggle
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 ml-2 transition-all"
-            :class="{'rotate-90 ': open}">
-                <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-              </svg>
-              
-              
-        </button>
-    
-        <ul x-show="open" 
-            @click.outside="open=false"
-            x-init="$nextTick(() => open=false)" 
-            x-cloak 
-            x-transition
-            class="bg-gray-500 text-white py-2 px-4 rounded-md shadow"
-        >
-            <li class="hover:bg-red-800 hover:text-black py-1 px-2"><a href="#">Edit</a></li>
-            <li class="hover:bg-red-800 hover:text-black py-1 px-2"><a href="#">Update</a></li>
-            <li class="hover:bg-red-800 hover:text-black py-1 px-2"><a href="#">Delete</a></li>
-        </ul>
-    </div>
-    
-    
-    
-<br>
-<!-- model -->
 
-<div x-data="{open:false}">
-    <button @click="open=!open" class="py-2 px-6 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
-        Toggle Model</button>
-        <!-- backdrop -->
-       
-    <div x-show="open" x-cloak x-transition class="fixed inset-0 bg-red-900 bg-opacity-50 flex items-center justify-center">
-        <!-- model  -->
-        <div  class="bg-white p-8 rounded-md shadow-lg">
-            
-            <div class="flex items-center justify-between">Model Titel
-                <button @click="open=false">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                  </svg>
-                </button>
-            </div>
-            <div >
-                Model Body
-            </div>
-            <div class="flex">
-                <button @click="window.location.href='https://www.youtube.com/'" class="py-1 px-2 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
-                    Accept</button>
-                    <button @click="open=!open" class="ml-1 py-1 px-2 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
-                        Close</button>
-            </div>
+<body class="min-h-screen p-8">
+  <h1 x-data="{visible:false}" x-intersect="visible=true"
+    class="transition-all duration-700 delay-100 flex justify-center items-center text-4xl font-bold  transform opacity-0 -translate-y-10"
+    :class="{'opacity-100 translate-y-0': visible}">Alpine JS Practice</h1>
+  <br>
+  <br>
+  <div x-data="{open:false,visible:false}" x-intersect="visible=true"
+    class="transition-all duration-700 delay-100 transform opacity-0 -translate-x-10"
+    :class="{'opacity-100 translate-x-0': visible}">
+    <button @click="open=!open"
+      class="py-2 px-6 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+      Toggle
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6 ml-2 transition-all" :class="{'rotate-90 ': open}">
+        <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+      </svg>
+    </button>
+
+    <ul x-show="open" @click.outside="open=false" x-init="$nextTick(() => open=false)" x-cloak x-transition
+      class="bg-gray-500 text-white py-2 px-4 rounded-md shadow">
+      <li class="hover:bg-red-800 hover:text-black py-1 px-2">
+        <a href="#">Edit</a>
+      </li>
+      <li class="hover:bg-red-800 hover:text-black py-1 px-2">
+        <a href="#">Update</a>
+      </li>
+      <li class="hover:bg-red-800 hover:text-black py-1 px-2">
+        <a href="#">Delete</a>
+      </li>
+    </ul>
+  </div>
+
+  <br>
+  <!-- model -->
+
+  <div x-data="{open:false}">
+    <button @click="open=!open"
+      class="py-2 px-6 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+      Toggle Model
+    </button>
+    <!-- backdrop -->
+
+    <div x-show="open" x-cloak x-transition
+      class="fixed z-50 inset-0 bg-red-900 bg-opacity-50 flex items-center justify-center">
+      <!-- model  -->
+      <div class=" z-50 bg-white p-8 rounded-md shadow-lg">
+        <div class="flex items-center justify-between">
+          Model Titel
+          <button @click="open=false">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+              stroke="currentColor" class="size-6">
+              <path stroke-linecap="round" stroke-linejoin="round"
+                d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </button>
+        </div>
+        <div>Model Body</div>
+        <div class="flex">
+          <button @click="window.location.href='https://www.youtube.com/'"
+            class="py-1 px-2 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+            Accept
+          </button>
+          <button @click="open=!open"
+            class="ml-1 py-1 px-2 bg-red-800 hover:bg-red-200 hover:text-black text-white flex items-center rounded-md shadow">
+            Close
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <br />
+  <!-- tabs -->
+
+  <div x-data="{ tabs: ['Home','About','Services'],activeTab:'Home'}"
+    class="w-full max-w-xl bg-gray-500 shadow-xl rounded-md p-6">
+    <!-- button -->
+    <div class="flex mb-2 border-b-2 border-gray-800 ">
+      <template x-for="tab in tabs">
+        <a @click="activeTab = tab" x-text="tab"
+          class="px-4 mb-2 py-2 font-semibold  text-white cursor-pointer focus:outline-none"
+          :class="{'border-blue-500 text-shadow border-l-2 text-blue-500':activeTab === tab}"></a>
+      </template>
+    </div>
+    <!-- Tabs -->
+    <div x-show="activeTab === 'Home'">
+      <h2 class="text-xl text-white font-semibold">🏠 Home</h2>
+      <p class='text-white'>Welcome to our homepage! Discover amazing content here.</p>
+    </div>
+    <div x-show="activeTab === 'About'">
+      <h2 class="text-xl text-white font-semibold">💼 About</h2>
+      <p class="text-white ">We offer top-notch web development, SEO, and digital marketing.</p>
+    </div>
+    <div x-show="activeTab === 'Services'">
+      <h2 class="text-xl text-white  font-semibold">💼 Services</h2>
+      <p class="text-white">We offer top-notch web development, SEO, and digital marketing.</p>
+    </div>
+  </div>
+  <br>
+  <br>
+  <!-- carosul -->
+  <div x-data="{
+    imgs:['img/1.jpg','img/2.jpg','img/3.jpg'],
+    activeImg:null,
+    prev(){
+      let index = this.imgs.indexOf(this.activeImg);
+      if(index === 0)
+      index = this.imgs.length;
+      this.activeImg = this.imgs[index-1];
+  },
+    next(){
+      let index = this.imgs.indexOf(this.activeImg);
+      if(index === this.imgs.length-1)
+      index= -1;
+      this.activeImg = this.imgs[index + 1];
+    },
+    init(){
+      this.activeImg = this.imgs.length > 0 ? this.imgs[0] : null
+    }
+  }" class="w-full mx-auto">
+    <div class="relative w-full aspect-w-16 aspect-h-9 overflow-hidden">
+      <template x-transition x-for="img in imgs">
+
+        <div x-show="activeImg === img">
+          <img :src="img" alt="Slide Image" class="w-full h-full object-cover">
+        </div>
+      </template>
+      <button @click="prev" class="text-black absolute transform -translate-y-1/2 left-0 top-1/2">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="h-16">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m18.75 4.5-7.5 7.5 7.5 7.5m-6-15L5.25 12l7.5 7.5" />
+        </svg>
+
+      </button>
+      <button @click="next" class="text-black absolute transform -translate-y-1/2 right-0 top-1/2"><svg
+          xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+          class="h-16">
+          <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+        </svg>
+      </button>
+    </div>
+    <div class="flex gap-2 mt-4 justify-center">
+      <template x-for="img in imgs">
+        <button @click="activeImg = img"
+          class="w-20 aspect-w-16 aspect-h-9 border border-gray-300 hover:border-red-600 overflow-hidden">
+          <img :src="img" alt="" class=" w-full h-full object-cover" />
+        </button>
+      </template>
+
+    </div>
+  </div>
+  <br>
+  <br>
+  <!-- accordian -->
+
+  <div x-data="{
+    visible:false,
+    items :[
+    {title: 'Item 1',body:'Body 1'},
+    {title: 'Item 2',body:'Body 2'},
+    {title: 'Item 3',body:'Body 3'},
+    {title: 'Item 4',body:'Body 4'},
+    ],
+    activeItem: null,
+    select(item){
+      if(this.activeItem === item){
+        this.activeItem = null
+      }else{
+
+        this.activeItem = item
+      }
+    }
+  }">
+    <template x-for="item in items">
+      <div x-intersect="visible=true" class="transition-all duration-700 delay-1000 transform opacity-0 translate-y-10"
+        :class="{'opacity-100 translate-y-0': visible}">
+        <div @click="select(item)"
+          class="flex rounded justify-between bg-gray-300 px-2 py-2 border hover:text-blue-500">
+          <span x-text="item.title"></span>
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+            stroke="currentColor" class="size-6 transition-all" :class="{'rotate-90': activeItem === item}">
+            <path stroke-linecap="round" stroke-linejoin="round" d="m5.25 4.5 7.5 7.5-7.5 7.5m6-15 7.5 7.5-7.5 7.5" />
+          </svg>
 
         </div>
-    </div>
-</div>
-<br>
-<!-- tabs -->
-
-<div x-data="{ tabs: ['Home','About','Services'],activeTab:'Home'}" class="w-full max-w-xl bg-white shadow-md rounded-md p-6">
-
-<!-- button -->
- <div class="flex border-b">
-    <template x-for="tab in tabs">
-       <a @click="activeTab = tab"
-       x-text="tab"
-       class="px-4 py-2 font-semibold border-b-2 cursor-pointer focus:outline-none"
-       :class="{'border-blue-500 text-blue-600':activeTab === tab}"></a>
+        <div x-show="activeItem === item" x-html="item.body" class="bg-emerald-500  rounded px-2 py-2 border"></div>
+      </div>
     </template>
- </div>
- <!-- Tabs -->
-  <div x-show="activeTab === 'Home'"><h2 class="text-xl font-semibold">🏠 Home</h2>
-    <p>Welcome to our homepage! Discover amazing content here.</p></div>
-  <div x-show="activeTab === 'About'"><h2 class="text-xl font-semibold"> About</h2>
-    <p>We offer top-notch web development, SEO, and digital marketing.</p></div>
-  <div x-show="activeTab === 'Services'"><h2 class="text-xl font-semibold">💼 Services</h2>
-    <p>We offer top-notch web development, SEO, and digital marketing.</p></div>
 
-</div>
-    
+  </div>
+
+  <br>
+  <br>
+  <!-- notification -->
+
+  <div x-data="{
+  visible:true,
+  timeout:5000,
+  percent:0,
+  intervel:null,
+  close(){
+    this.visible = false;
+    clearInterval(this.intervel)
+  },
+  init(){
+    setTimeout(()=>{
+      this.visible = false;
+    },this.timeout);
+   const startDate = Date.now();
+   const futureDate = Date.now() + this.timeout;
+   this.interval = setInterval(()=>{
+     const date = Date.now(); 
+     this.percent = (date - startDate) * 100 / (futureDate - startDate)
+     if( this.percent >= 100){
+      clearInterval(this.intervel)
+     }
+   },10)
+  }
+}" x-show="visible" class="relative py-4 px-4 bg-emerald-500 rounded  text-white">
+    <div class="font-bold mb-2 text-xl">Lorem ipsum dolor sit amet</div>
+    <div class="text-sm">Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, deserunt possimus quaerat
+      consequatur ex, odit vitae adipisci soluta, porro pariatur laboriosam velit eos a in nisi quasi saepe quas.
+      Doloremque omnis quisquam suscipit facere nihil. Perferendis odio facere atque consequatur a harum, debitis,
+      maxime impedit illum nulla porro doloremque nesciunt!</div>
+    <button @click="close"
+      class="absolute right-2 top-2 rounded-full w-[30px] h-[30px] flex justify-center items-center hover:bg-black/30">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
+        class="size-6">
+        <path stroke-linecap="round" stroke-linejoin="round"
+          d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+      </svg>
+    </button>
+    <!-- progress -->
+    <div>
+      <div class=" absolute left-0 bottom-0 rounded h-[10px]  bg-black/50" :style="{ width: percent + '%' }">
+      </div>
+    </div>
+    <div>
+
+      <div></div>
+    </div>
+
 </body>
+
 </html>
